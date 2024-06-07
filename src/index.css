@@ -1,0 +1,115 @@
+.navbar {
+  background-color: #312f2f;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  width: 100%;
+}
+
+.navbar h1 {
+  margin: 0;
+  color: #e4e4e4;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #e4e4e4;
+  margin-left: 10px;
+}
+
+.navbar a:hover {
+  color: #f1b2b2;
+
+}
+
+
+.form-container {
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  margin-bottom: 20px;
+}
+
+.form-container input,
+.form-container textarea {
+  width: 50%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.form-container button {
+  padding: 10px 20px;
+  background-color: #8eaac9;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.post-card {
+  background-color: #f9f9f9;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease; 
+}
+
+.post-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+
+.post-card h3 {
+  margin-top: 0;
+  font-size: 1.5rem; 
+  color: #333; 
+}
+
+.post-card p {
+  margin-bottom: 10px;
+  line-height: 1.5; 
+  color: #666; 
+}
+
+.post-card button {
+  padding: 10px 20px;
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease; 
+}
+
+.post-card button:hover {
+  background-color: #c82333; }
+
+
+.comment-input {
+  margin-bottom: 10px; 
+}
+
+.comment-input input,
+.comment-input textarea {
+  width: 50%; 
+  padding: 10px; 
+  margin-bottom: 10px; 
+  border: 1px solid #ccc; 
+  border-radius: 5px; 
+}
+
+.comment-input textarea {
+  resize: vertical; 
+}
+
+.comment-input button {
+  padding: 10px 20px; 
+  background-color: #007bff; 
+  color: #fff; 
+  border: none; 
+  border-radius: 5px; 
+  cursor: pointer; 
+}
+
+.comment-input button:hover {
+  background-color: #0056b3; 
+}
