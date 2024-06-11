@@ -1,14 +1,36 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../firebase/index";
+import { AppContext } from "../context/AppContext";
 
 const NavBar = () => {
-  return (
-    <div className="navbar">
-      <h1>Danicas blogg</h1>
+  const { currentUser } = useAuth();
+  const { logout } = useContext(AppContext);
 
-      <Link to="/">Home</Link>
-      <Link to="/Login">Logga in</Link>
-    </div>
+  if (!currentUser) {
+    return (
+      <nav className="navbar">
+        <h1>Blogg</h1>
+        <div>
+          <Link to="/">Hem</Link>
+          <Link to="/login">Logga in</Link>
+        </div>
+      </nav>
+    );
+  }
+
+  return (
+    <nav className="navbar">
+      <h1>Blogg</h1>
+      <div>
+        <Link to="/">Hem</Link>
+        <span>Välkommen, {currentUser.email}!</span>
+        <button onClick={logout} className="logout-button">
+          Logga ut
+        </button>
+      </div>
+    </nav>
   );
 };
+
 export default NavBar;

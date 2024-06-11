@@ -1,11 +1,16 @@
 import React, { useState } from "react";
+import { useAuth } from "../firebase";
 
 const Comments = ({ comments, onAddComment }) => {
   const [newComment, setNewComment] = useState({ username: "", text: "" });
+  const { currentUser } = useAuth();
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setNewComment({ ...newComment, [name]: value });
+    setNewComment({
+      ...newComment,
+      username: currentUser.email,
+      text: e.target.value,
+    });
   };
 
   const handleAddComment = () => {
@@ -25,16 +30,8 @@ const Comments = ({ comments, onAddComment }) => {
           </li>
         ))}
       </ul>
-      <input
-        type="text"
-        name="username"
-        value={newComment.username}
-        onChange={handleChange}
-        placeholder="Användarnamn"
-      />
       <textarea
         name="text"
-        value={newComment.text}
         onChange={handleChange}
         placeholder="Skriv en kommentar"
       />

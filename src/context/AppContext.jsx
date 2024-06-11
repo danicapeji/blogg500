@@ -1,5 +1,5 @@
-// AppContext.jsx
 import React, { createContext, useState } from "react";
+import { auth } from "../firebase/firebase";
 
 export const AppContext = createContext();
 
@@ -20,6 +20,36 @@ export const AppProvider = ({ children }) => {
   ]);
 
   const [comments, setComments] = useState({});
+  const [user, setUser] = useState(null);
+
+  
+  const loginWithEmailPassword = async (email, password) => {
+    try {
+      const userCredential = await auth.signInWithEmailAndPassword(email, password);
+      setUser(userCredential.user);
+    } catch (error) {
+      console.error("Error signing in with email and password:", error);
+    }
+  };
+
+  const registerWithEmailPassword = async (email, password) => {
+    try {
+      const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+      setUser(userCredential.user);
+    } catch (error) {
+      console.error("Error registering with email and password:", error);
+    }
+  };
+
+  const logout = async () => {
+    try {
+      await auth.signOut();
+      setUser(null);
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
+  };
+
   const addComment = (postId, comment) => {
     setComments((prevComments) => ({
       ...prevComments,
@@ -33,7 +63,17 @@ export const AppProvider = ({ children }) => {
 
   return (
     <AppContext.Provider
-      value={{ blogPosts, setBlogPosts, comments, addComment, addBlogPost }}
+      value={{
+        blogPosts,
+        setBlogPosts,
+        comments,
+        addComment,
+        addBlogPost,
+        user,
+        loginWithEmailPassword,
+        registerWithEmailPassword,
+        logout
+      }}
     >
       {children}
     </AppContext.Provider>

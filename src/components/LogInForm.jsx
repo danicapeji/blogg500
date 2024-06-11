@@ -1,17 +1,21 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../firebase";
+import { useAppContext } from "../context/AppContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { loginWithEmailPassword } = useAuth();
+  const { login } = useAppContext();
   const navigate = useNavigate();
 
   const handleLogin = async () => {
     if (email && password) {
-      await loginWithEmailPassword(email, password);
-      navigate("/");
+      const user = await login(email, password);
+      if (user) {
+        navigate("/");
+      } else {
+        alert("Invalid credentials");
+      }
     } else {
       alert("Please enter email and password");
     }
