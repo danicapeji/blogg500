@@ -7,6 +7,7 @@ import NavBar from "./components/Navbar";
 import { AppProvider } from "./context/AppContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { AuthProvider } from "./firebase/index";
+import RegisterComponent from "./components/RegisterComponent";
 
 const App = () => {
   return (
@@ -15,10 +16,11 @@ const App = () => {
         <Router>
           <NavBar />
           <Routes>
-            <Route path="/" element={<ProtectedRoute />}>
+            <Route element={<ProtectedRoute />}>
               <Route path="/" element={<Home />} />
-            </Route>
+              </Route>
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<RegisterComponent />} />
           </Routes>
         </Router>
       </AppProvider>

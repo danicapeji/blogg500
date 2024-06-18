@@ -22,7 +22,6 @@ export const AppProvider = ({ children }) => {
   const [comments, setComments] = useState({});
   const [user, setUser] = useState(null);
 
-  
   const loginWithEmailPassword = async (email, password) => {
     try {
       const userCredential = await auth.signInWithEmailAndPassword(email, password);
@@ -61,6 +60,14 @@ export const AppProvider = ({ children }) => {
     setBlogPosts((prevPosts) => [...prevPosts, newPost]);
   };
 
+  const deleteBlogPost = (postId) => {
+    setBlogPosts((prevPosts) => prevPosts.filter(post => post.id !== postId));
+  };
+
+  const updateBlogPost = (updatedPost) => {
+    setBlogPosts((prevPosts) => prevPosts.map(post => (post.id === updatedPost.id ? updatedPost : post)));
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -69,6 +76,8 @@ export const AppProvider = ({ children }) => {
         comments,
         addComment,
         addBlogPost,
+        deleteBlogPost,
+        updateBlogPost,
         user,
         loginWithEmailPassword,
         registerWithEmailPassword,

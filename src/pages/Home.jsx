@@ -1,23 +1,27 @@
 import React, { useContext, useState } from "react";
 import BlogPosts from "../components/BlogPosts";
 import { AppContext } from "../context/AppContext";
-import { useAuth } from "../firebase"; // Uppdaterad import här
+import { useAuth } from "../firebase"; 
 
 const Home = () => {
   const { addBlogPost } = useContext(AppContext);
-  const { currentUser } = useAuth(); // Uppdaterad användning här
+  const { currentUser } = useAuth(); 
   const [newPost, setNewPost] = useState({ title: "", text: "" });
 
   const handleAddPost = () => {
-    const postToAdd = {
-      id: Math.random(),
-      title: newPost.title,
-      author: currentUser.email, // Använd inloggad användares email
-      text: newPost.text,
-    };
+    if (newPost.title && newPost.text) {
+      const postToAdd = {
+        id: Math.random().toString(36).substr(2, 9), 
+        title: newPost.title,
+        author: currentUser.email, 
+        text: newPost.text,
+      };
 
-    addBlogPost(postToAdd);
-    setNewPost({ title: "", text: "" });
+      addBlogPost(postToAdd);
+      setNewPost({ title: "", text: "" });
+    } else {
+      alert("Både titel och innehåll är obligatoriska.");
+    }
   };
 
   const handleChange = (e) => {
